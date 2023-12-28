@@ -41,7 +41,7 @@ t.sleep(1)
 env.move(vels=[[2,-2],
                [2,-2]])
 
-t.sleep(3.19)
+t.sleep(3.33)
 env.move(vels=[[0,0],
                [0,0]])
 env.close_grip()
@@ -52,13 +52,19 @@ t.sleep(2.5)
 env.move(vels=[[2,-2],
                [2,-2]])
 
-t.sleep(3.19)
-env.open_grip()
-t.sleep(1)
-env.shoot()
+t.sleep(3.75)
 env.move(vels=[[0,0],
                [0,0]])
-env.close_grip()
+t.sleep(1)
+while True:
+    img = env.get_image(cam_height=0, dims=[512,512])
+    cv2.imshow("img", img)
+    k = cv2.waitKey(1)
+    if k==ord('q'):
+        break
+        env.open_grip()
+        t.sleep(1)
+        env.shoot()
+        env.close_grip()
 t.sleep(2)
-
 env.close()
